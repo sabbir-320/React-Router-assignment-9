@@ -1,25 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Container from '@material-ui/core/Container'
+import Header from './components/header/Header';
+import Err from './components/err/Err';
+import Body from './components/body/Body';
+import PostDetails from './components/PostDetails/PostDetails';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Body />
+          </Route>
+          <Route path="/post">
+            <Body />
+          </Route>
+          <Route path="/:details">
+            <PostDetails/>
+          </Route>
+          <Route path="*">
+            <Err />
+          </Route>
+        </Switch>
+      </Router>
+    </Container>
   );
 }
 
